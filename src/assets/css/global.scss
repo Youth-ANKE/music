@@ -1,0 +1,57 @@
+// 全局主题变量
+:root {
+  --primary-color: #165DFF;
+  --primary-hover: #4080FF;
+  --bg-main: #FFFFFF;
+  --bg-side: #F5F7FA;
+  --bg-card: #FFFFFF;
+  --text-main: #1D2129;
+  --text-secondary: #4E5969;
+  --text-weak: #86909C;
+  --border-color: #E5E6EB;
+  --header-height: 64px;
+  --sidebar-width: 240px;
+  --player-height: 80px;
+}
+
+// 通用工具类
+.flex {
+  display: flex;
+}
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// 滚动条样式
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: #C9CDD4;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+// 卡片hover动效
+.card-hover {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
