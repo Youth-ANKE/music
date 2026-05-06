@@ -29,10 +29,10 @@
       </div>
       <div class="progress-bar">
         <span class="time-text">{{ formatTime(playerStore.currentTime) }}</span>
-        <div class="progress-wrap" @mousedown="handleProgressClick">
+        <div class="progress-wrap" @mousedown="startDrag" @click="handleProgressClick">
           <div class="progress-bg">
-            <div class="progress-fill" :style="{ width: playerStore.progress + '%' }">
-              <div class="progress-dot"></div>
+            <div class="progress-fill" :style="{ width: displayProgress + '%' }">
+              <div class="progress-dot" :class="{ visible: isDragging }"></div>
             </div>
           </div>
         </div>
@@ -61,10 +61,60 @@
 </template>
 
 <script setup>
+import { ref, computed, onUnmounted } from 'vue'
 import { usePlayerStore } from '../store/player'
 
 const playerStore = usePlayerStore()
 
+// 拖拽状态
+const isDragging = ref(false)
+const dragProgress = ref(0)
+
+// 当前显示的进度（拖拽时用 dragProgress，否则用 store 的 progress）
+const displayProgress = computed(() => isDragging.value ? dragProgress.value : playerStore.progress)
+
+// 计算进度条位置百分比
+const getProgressPercent = (clientX, element) => {
+  const rect = element.getBoundingClientRect()
+  const percent = ((clientX - rect.left) / rect.width) * 100
+  return Math.max(0, Math.min(100, percent))
+}
+
+// 开始拖拽
+const startDrag = (e) => {
+  isDragging.value = true
+  dragProgress.value = getProgressPercent(e.clientX, e.currentTarget)
+  document.addEventListener('mousemove', onDrag)
+  document.addEventListener('mouseup', endDrag)
+}
+
+// 拖拽中
+const onDrag = (e) => {
+  if (!isDragging.value) return
+  const progressWrap = document.querySelector('.progress-wrap')
+  if (progressWrap) {
+    dragProgress.value = getProgressPercent(e.clientX, progressWrap)
+  }
+}
+
+// 结束拖拽
+const endDrag = () => {
+  if (isDragging.value) {
+    playerStore.setProgress(dragProgress.value)
+    isDragging.value = false
+  }
+  document.removeEventListener('mousemove', onDrag)
+  document.removeEventListener('mouseup', endDrag)
+}
+
+// 点击跳转
+const handleProgressClick = (e) => {
+  if (isDragging.value) return
+  const percent = getProgressPercent(e.clientX, e.currentTarget)
+  playerStore.setProgress(percent)
+}
+
+// 格式化时间
 const formatTime = (seconds) => {
   if (isNaN(seconds) || seconds < 0) return '00:00'
   const min = Math.floor(seconds / 60).toString().padStart(2, '0')
@@ -72,12 +122,11 @@ const formatTime = (seconds) => {
   return `${min}:${sec}`
 }
 
-const handleProgressClick = (e) => {
-  const wrap = e.currentTarget
-  const rect = wrap.getBoundingClientRect()
-  const percent = ((e.clientX - rect.left) / rect.width) * 100
-  playerStore.setProgress(Math.max(0, Math.min(100, percent)))
-}
+// 组件卸载时清理事件监听
+onUnmounted(() => {
+  document.removeEventListener('mousemove', onDrag)
+  document.removeEventListener('mouseup', endDrag)
+})
 </script>
 
 <style lang="scss" scoped>
@@ -230,11 +279,18 @@ const handleProgressClick = (e) => {
             border-radius: 50%;
             background-color: var(--primary-color);
             opacity: 0;
-            transition: opacity 0.2s ease;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+
+            &.visible {
+              opacity: 1;
+              transform: translateY(-50%) scale(1.2);
+            }
           }
         }
 
         &:hover {
+          height: 6px;
+
           .progress-fill .progress-dot {
             opacity: 1;
           }
