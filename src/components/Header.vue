@@ -12,6 +12,10 @@
         <span class="nav-item">排行榜</span>
         <span class="nav-item">我的音乐</span>
       </nav>
+      <el-icon class="menu-toggle" size="24" @click="toggleMobileMenu">
+        <Expand v-if="!mobileMenuOpen" />
+        <Fold v-else />
+      </el-icon>
     </div>
     <div class="header-right">
       <div class="search-box">
@@ -28,7 +32,13 @@
 
 <script setup>
 import { useRoute } from 'vue-router'
+import { ref } from 'vue'
+import { Expand, Fold } from '@element-plus/icons-vue'
 const route = useRoute()
+const mobileMenuOpen = ref(false)
+const toggleMobileMenu = () => {
+  mobileMenuOpen.value = !mobileMenuOpen.value
+}
 </script>
 
 <style lang="scss" scoped>
@@ -97,6 +107,12 @@ const route = useRoute()
       }
     }
   }
+
+  .menu-toggle {
+    display: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+  }
 }
 
 .header-right {
@@ -134,6 +150,74 @@ const route = useRoute()
 
     &:hover {
       color: var(--primary-color);
+    }
+  }
+}
+
+// 响应式适配
+@media (max-width: 1024px) {
+  .header-left {
+    gap: 24px;
+
+    .nav-menu {
+      gap: 20px;
+
+      .nav-item {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .header-right {
+    gap: 16px;
+
+    .search-box {
+      width: 200px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    padding: 0 16px;
+  }
+
+  .header-left {
+    gap: 16px;
+
+    .logo {
+      .logo-text {
+        display: none;
+      }
+    }
+
+    .nav-menu {
+      display: none;
+    }
+
+    .menu-toggle {
+      display: block;
+    }
+  }
+
+  .header-right {
+    gap: 12px;
+
+    .search-box {
+      width: 140px;
+      height: 32px;
+
+      input {
+        font-size: 12px;
+
+        &::placeholder {
+          content: '搜索';
+        }
+      }
+    }
+
+    .icon-btn {
+      display: none;
     }
   }
 }

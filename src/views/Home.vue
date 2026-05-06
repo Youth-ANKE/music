@@ -428,4 +428,195 @@ const formatPlayCount = (count) => {
     }
   }
 }
+
+// 响应式适配
+@media (max-width: 1280px) {
+  .rank-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .home-container {
+    padding: 16px;
+  }
+
+  .banner-wrap {
+    margin-bottom: 24px;
+
+    .banner-item {
+      padding: 32px 40px;
+
+      .banner-content {
+        .banner-title {
+          font-size: 28px;
+        }
+
+        .banner-desc {
+          font-size: 14px;
+        }
+      }
+
+      .banner-img {
+        width: 240px;
+        height: 180px;
+      }
+    }
+  }
+
+  .quick-entry {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .section-wrap {
+    margin-bottom: 32px;
+
+    .section-header {
+      .section-title {
+        font-size: 20px;
+      }
+    }
+  }
+
+  .playlist-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 16px;
+  }
+
+  .rank-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .home-container {
+    padding: 12px;
+  }
+
+  .banner-wrap {
+    margin-bottom: 20px;
+
+    .banner-item {
+      padding: 24px;
+      flex-direction: column;
+      text-align: center;
+      gap: 16px;
+
+      .banner-content {
+        align-items: center;
+
+        .banner-title {
+          font-size: 22px;
+        }
+
+        .banner-desc {
+          font-size: 13px;
+        }
+      }
+
+      .banner-img {
+        width: 200px;
+        height: 150px;
+      }
+    }
+  }
+
+  .quick-entry {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 24px;
+
+    .entry-card {
+      padding: 12px 8px;
+
+      .entry-name {
+        font-size: 12px;
+      }
+    }
+  }
+
+  .section-wrap {
+    margin-bottom: 24px;
+
+    .section-header {
+      margin-bottom: 12px;
+
+      .section-title {
+        font-size: 18px;
+      }
+
+      .more-btn {
+        font-size: 12px;
+      }
+    }
+  }
+
+  .playlist-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+
+    .playlist-card {
+      .playlist-name {
+        font-size: 13px;
+      }
+
+      .playlist-creator {
+        font-size: 11px;
+      }
+    }
+  }
+
+  .rank-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+
+    .rank-card {
+      .rank-header {
+        padding: 16px;
+
+        .rank-name {
+          font-size: 16px;
+        }
+      }
+
+      .rank-song-list {
+        padding: 8px;
+
+        .rank-song-item {
+          padding: 6px;
+
+          .rank-num {
+            font-size: 14px;
+          }
+
+          .song-name {
+            font-size: 13px;
+          }
+
+          .singer-name {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .quick-entry {
+    grid-template-columns: repeat(3, 1fr);
+
+    .entry-card {
+      padding: 10px 4px;
+
+      .entry-name {
+        font-size: 11px;
+      }
+    }
+  }
+
+  .playlist-grid {
+    gap: 10px;
+  }
+}
 </style>

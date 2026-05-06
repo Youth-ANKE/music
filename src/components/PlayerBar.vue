@@ -304,4 +304,94 @@ const handleProgressClick = (e) => {
     }
   }
 }
+
+// 响应式适配
+@media (max-width: 1024px) {
+  .player-container {
+    padding: 0 16px;
+  }
+
+  .song-info {
+    width: 180px;
+
+    .song-detail {
+      max-width: 90px;
+    }
+  }
+
+  .play-control {
+    max-width: 500px;
+  }
+
+  .volume-control {
+    width: 160px;
+  }
+}
+
+@media (max-width: 768px) {
+  .player-container {
+    height: 60px;
+    padding: 0 12px;
+  }
+
+  .song-info {
+    width: auto;
+    min-width: 0;
+    flex: 1;
+    gap: 8px;
+
+    .icon-btn {
+      display: none;
+    }
+
+    .song-detail {
+      max-width: 100px;
+
+      .song-name {
+        font-size: 12px;
+      }
+
+      .singer-name {
+        display: none;
+      }
+    }
+  }
+
+  .play-control {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 60px;
+    max-width: none;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid var(--border-color);
+
+    .control-buttons {
+      gap: 16px;
+
+      .play-btn {
+        width: 36px;
+        height: 36px;
+      }
+
+      .control-btn:first-child,
+      .control-btn:last-child {
+        display: none;
+      }
+    }
+
+    .progress-bar {
+      .time-text {
+        width: 32px;
+        font-size: 11px;
+      }
+    }
+  }
+
+  .volume-control {
+    display: none;
+  }
+}
 </style>

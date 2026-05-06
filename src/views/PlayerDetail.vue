@@ -266,4 +266,128 @@ onMounted(() => {
     gap: 16px;
   }
 }
+
+// 响应式适配
+@media (max-width: 1024px) {
+  .player-detail-container {
+    .player-content {
+      gap: 40px;
+
+      .record-disc {
+        width: 300px;
+        height: 300px;
+      }
+
+      .lyric-wrap {
+        width: 350px;
+
+        .song-info {
+          .song-name {
+            font-size: 28px;
+          }
+
+          .singer-album {
+            font-size: 16px;
+          }
+        }
+
+        .lyric-content {
+          .lyric-line {
+            font-size: 16px;
+
+            &.active {
+              font-size: 18px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .player-detail-container {
+    padding: 20px;
+
+    .close-btn {
+      top: 16px;
+      right: 16px;
+    }
+
+    .player-content {
+      flex-direction: column;
+      gap: 32px;
+      height: calc(100vh - 140px);
+      justify-content: flex-start;
+      overflow-y: auto;
+
+      .record-disc {
+        width: 240px;
+        height: 240px;
+        margin: 0 auto;
+
+        .record-cover {
+          width: 160px;
+          height: 160px;
+        }
+      }
+
+      .lyric-wrap {
+        width: 100%;
+        height: auto;
+        flex: 1;
+        text-align: center;
+
+        .song-info {
+          margin-bottom: 24px;
+
+          .song-name {
+            font-size: 22px;
+          }
+
+          .singer-album {
+            font-size: 14px;
+          }
+        }
+
+        .lyric-content {
+          margin-bottom: 24px;
+
+          .lyric-line {
+            font-size: 15px;
+            margin-bottom: 12px;
+
+            &.active {
+              font-size: 17px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .player-detail-container {
+    .player-content {
+      .record-disc {
+        width: 200px;
+        height: 200px;
+
+        .record-cover {
+          width: 130px;
+          height: 130px;
+        }
+      }
+
+      .lyric-wrap {
+        .song-info {
+          .song-name {
+            font-size: 18px;
+          }
+        }
+      }
+    }
+  }
+}
 </style>

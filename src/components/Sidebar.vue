@@ -119,4 +119,17 @@ const myPlaylist = [
     white-space: nowrap;
   }
 }
+
+// 响应式适配
+@media (max-width: 1024px) {
+  .sidebar-container {
+    width: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar-container {
+    display: none;
+  }
+}
 </style>
